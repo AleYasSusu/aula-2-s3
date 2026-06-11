@@ -23,11 +23,10 @@ public class S3MediaService {
 
     private final S3Client s3Client;
 
-    @Value("${aws.s3.bucket}")
-    private String bucket;
+    private static final String BUCKET =
+            "amzn-meu-primeiro-bucket-495680546949-us-east-2-an";
 
-    @Value("${aws.s3.region}")
-    private String region;
+    private static final String REGION = "US_EAST_2";
 
     public S3MediaService(S3Client s3Client) {
         this.s3Client = s3Client;
@@ -43,7 +42,7 @@ public class S3MediaService {
 
         do {
             ListObjectsV2Request request = ListObjectsV2Request.builder()
-                    .bucket(bucket)
+                    .bucket(BUCKET)
                     .continuationToken(continuationToken)
                     .build();
 
@@ -78,7 +77,7 @@ public class S3MediaService {
                     : pasta + "/" + nomeArquivo;
 
             PutObjectRequest request = PutObjectRequest.builder()
-                    .bucket(bucket)
+                    .bucket(BUCKET)
                     .key(key)
                     .contentType(file.getContentType())
                     .contentLength(file.getSize())
@@ -108,7 +107,7 @@ public class S3MediaService {
      */
     public Map<String, String> buscarMetadata(String key) {
         HeadObjectRequest request = HeadObjectRequest.builder()
-                .bucket(bucket)
+                .bucket(BUCKET)
                 .key(key)
                 .build();
 
@@ -122,7 +121,7 @@ public class S3MediaService {
      */
     public String lerArquivo(String key) {
         GetObjectRequest getRequest = GetObjectRequest.builder()
-                .bucket(bucket)
+                .bucket(BUCKET)
                 .key(key)
                 .build();
 
@@ -144,7 +143,7 @@ public class S3MediaService {
      */
     public void deletarArquivo(String key) {
         DeleteObjectRequest request = DeleteObjectRequest.builder()
-                .bucket(bucket)
+                .bucket(BUCKET)
                 .key(key)
                 .build();
 
@@ -161,8 +160,8 @@ public class S3MediaService {
 
         return String.format(
                 "https://%s.s3.%s.amazonaws.com/%s",
-                bucket,
-                region,
+                BUCKET,
+                REGION,
                 encodedKey
         );
     }
