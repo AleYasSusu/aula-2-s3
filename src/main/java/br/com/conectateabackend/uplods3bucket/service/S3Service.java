@@ -5,7 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
-import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class S3Service {
     private final S3Client s3Client;
 
     private static final String BUCKET =
-            "bucket-aws-class-4-447197207642-sa-east-1-an";
+            "amzn-meu-primeiro-bucket-495680546949-us-east-2-an";
 
     public S3Service(S3Client s3Client) {
         this.s3Client = s3Client;
